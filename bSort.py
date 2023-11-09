@@ -81,6 +81,6 @@ def bSortCount(list):
   return counter
 
 
-arr = [12, 11, 13, 5, 6]
-print("Iterations:", bSortCount(arr))
-print(arr)
+# arr = [12, 11, 13, 5, 6]
+# print("Iterations:", bSortCount(arr))
+# print(arr)
