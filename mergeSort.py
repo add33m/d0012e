@@ -16,7 +16,9 @@ def insertionSort2(arr):
 
 def merge_sort(list):
 
-  if len(list) <= 5:
+  k = 5
+
+  if len(list) <= k:
     print("whoop")
     insertionSort2(list)
     return list
@@ -36,9 +38,7 @@ def merge_sort(list):
   while i < len(left_values) and j < len(right_values):
 
     if left_values[i] < right_values[j]:
-
       l.append(left_values[i])
-
       i += 1
 
     else:
