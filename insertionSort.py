@@ -1,4 +1,7 @@
 
+
+
+
 def insertionSort(arr):
     n = len(arr)  # Get the length of the array
       
@@ -12,6 +15,10 @@ def insertionSort(arr):
             arr[j+1] = arr[j]  # Shift elements to the right
             j -= 1
         arr[j+1] = key  # Insert the key in the correct position
+
+
+
+
 
 def insertionSortCount(arr):
     counter = 1
