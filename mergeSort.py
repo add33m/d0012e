@@ -16,10 +16,11 @@ def insertionSort2(arr):
 
 def merge_sort(list):
 
-  k = 5
+  k = 9
 
   if len(list) <= k:
     print("whoop")
+    print (len(list))
     insertionSort2(list)
     return list
 
@@ -51,7 +52,7 @@ def merge_sort(list):
   return l
 
 
-newList = [5,3,1,2,6,4,9,7,8]
+newList = [5,3,1,2,6,4,9,7,8,10,61,55,33,45,86,32,14,57,87,99,55,30,22,66,88]
 
 print(newList)
 
