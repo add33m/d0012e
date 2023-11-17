@@ -1,17 +1,18 @@
 import timeit as t
 import random as r
+import math as m
 
 from bSort import bSortCount
 from mergeSort2 import mergesort2CountI, mergesort2CountB
 
 # Run a test given an algorithm and input data, returns "operation count", time taken (secs) and if data is correct
-def run_test(algo, data, k):
+def run_test(algo, data, k, amount=1):
   ops_count = [0]
 
   def test():
     ops_count[0] = algo(data, k)[1]
 
-  time_delta = t.timeit(test, number=1)
+  time_delta = t.timeit(test, number=amount)
 
   return ops_count[0], time_delta
 
@@ -33,11 +34,11 @@ def run_testset(algo, name):
       # Open a file to write results to
       with open(f"{name}_{type}.csv", "w") as csv:
         # Write header for csv
-        csv.write("size, k2, k8, k32, k128, k256\n")
+        csv.write("size,k1,k10,k.1n,k.5n,kn\n")
 
         # Read all the sizes
         for size in range(3, 25):
-          if size < 19:
+          if 5 < size < 16:
             linedata = f.readline().split(", ")
             # Remove leading "'["
             linedata[0] = linedata[0][2:]
@@ -45,11 +46,11 @@ def run_testset(algo, name):
             # Remove trailing "]\n'"
             linedata[-1] = linedata[-1][:-2]
             line = str(2**size) + ","
-            line += str(run_test(algo, linedata, 2)[0]) + ","
-            line += str(run_test(algo, linedata, 8)[0]) + ","
-            line += str(run_test(algo, linedata, 32)[0]) + ","
-            line += str(run_test(algo, linedata, 128)[0]) + ","
-            line += str(run_test(algo, linedata, 256)[0]) + "\n"
+            line += str(run_test(algo, linedata, 1)[1]) + ","
+            line += str(run_test(algo, linedata, 10)[1]) + ","
+            line += str(run_test(algo, linedata, m.floor(.1*2**size))[1]) + ","
+            line += str(run_test(algo, linedata, m.floor(.5*2**size))[1]) + ","
+            line += str(run_test(algo, linedata, 2**size)[1]) + "\n"
             print("Tested", name, type, 2**size)
             print(line)
             csv.write(line)
@@ -84,7 +85,63 @@ def run_testset(algo, name):
     _test("as")
 
 # run_testset(bSortCount)
+# print("I")
+# run_testset(mergesort2CountI, "ins")
+# print("B")
+# run_testset(mergesort2CountB, "bin")
+
+# Find optimal k
+def optimize_k(algo, name):
+  print("Optimizing k...", name)
+  with open("dataset", "r") as f:
+    # Local func to run same code thrice
+    def _test(type):
+      # Read all the sizes
+      for size in range(3, 25):
+        if 5 < size < 16:
+          linedata = f.readline().split(", ")
+          # Remove leading "'["
+          linedata[0] = linedata[0][2:]
+
+          # Remove trailing "]\n'"
+          linedata[-1] = linedata[-1][:-2]
+          
+          # Divide-and-conquer to find optimal k by looking in the half where delta between border and middle point is lowest
+          upper_bound = 2**(size-1)
+          lower_bound = 1
+          upper = run_test(algo, linedata, upper_bound, 5)[1]
+          lower = run_test(algo, linedata, lower_bound, 5)[1]
+          middle = run_test(algo, linedata, (upper_bound+lower_bound)//2, 5)[1]
+
+          while upper_bound - lower_bound > 1:
+            if abs(upper-middle) < abs(lower - middle):
+              # Choose upper half
+              lower = middle
+              lower_bound = (upper_bound+lower_bound) // 2
+            else:
+              # Choose lower half
+              upper = middle
+              upper_bound = (upper_bound+lower_bound) // 2
+
+            middle = run_test(algo, linedata, (upper_bound+lower_bound)//2, 5)[1]
+            
+          print(f"Optimal k for size {2**size} =", lower_bound, "with time", lower)
+        else:
+          f.readline()
+
+    # Generate 24 datasets of completely unsorted random data, sizes 2^3 - 2^24
+    print("Testing unsorted data...")
+    _test("us")
+
+    # Generate 24 datasets of mostly unsorted random data, sizes 2^3 - 2^24
+    print("Testing mostly unsorted data...")
+    _test("mus")
+
+    # Generate 24 datasets of almost sorted random data, sizes 2^3 - 2^24
+    print("Testing almost sorted data...")
+    _test("as")
+
 print("I")
-run_testset(mergesort2CountI, "ins")
+optimize_k(mergesort2CountI, "ins")
 print("B")
-run_testset(mergesort2CountB, "bin")
+optimize_k(mergesort2CountB, "bin")
