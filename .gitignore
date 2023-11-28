@@ -6,3 +6,4 @@
 *.pyc
 dataset
 *.csv
+*.DS_Store
