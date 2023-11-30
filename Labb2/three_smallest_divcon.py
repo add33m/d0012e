@@ -3,7 +3,23 @@
 # With this we can divide in 2 until array is exactly len 3, and return these values in sorted order
 # We then perform use a mergesort-like algorithm and always return only the three smallest values
 
-# This algorithm will not run in exactly O(n) but worst-case is approximately linear O(n + log n)
+# This algorithm will not run in exactly O(n) but worst-case is approximately linear O(n + log n) ~ O(n)
+# Exact number of comparisons will be the following:
+#   n [for bottom-level insertionsort] + 3 * (k-1) [for mergesort]
+
+# Proof (induction):
+# 1. Base case: k = 1 <=> n = 3
+# Returns a sorted version of the list, i.e. x < y < z
+# 2. Assume that the algorithm is correct for all k = 1, ..., p
+# 3. Show that the algo is correct for k = p + 1  =>  k > 1 <=> n > 3
+# In this case, the list will be divided in two halves, each with length n / 2
+# n = 3 * 2^(k-1) = 3 * 2^(p+1 - 1) = 3 * 2^p = 2 * (3 * 2^(p-1))
+# Any list of n = 3 * 2^(k-1), where 1 <= k <= p will produce a sorted list of three elements,
+# Therefore a list of n = 2 * (3 * 2^(p-1)) can be divided into two lists of n = 3 * 2^(p-1)
+# From which two sorted lists of n = 3 each can be produced
+# We then run mergesort on these two, discarding the top 3 values and keeping the bottom 3
+# This will produce a sorted list of 3 elements
+# Therefore, the algo will produce a sorted list of 3 elements for all (natural) values of k >= 1
 
 def three_smallest_divcon(list):
     if len(list) == 3:
