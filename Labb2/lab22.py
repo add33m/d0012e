@@ -1,30 +1,3 @@
-def linearVersion(arr):
-    n = len(arr)  # Get the length of the array
-    outputArray = [0,0,0]
-    counter = 0
-
-    for i in range(0, 3):
-        print("round", i)
-        outputArray[i] = arr[0]
-        smallestLocation = 0
-
-        for j in range(0, n):
-            counter = counter + 1
-            if outputArray[i] > arr[j]:
-                outputArray[i] = arr[j]
-                smallestLocation = j
-            j+= j
-        print(smallestLocation)
-        arr.pop(smallestLocation)        #this is not a good way to go about doing this... or is it? Is this a constant operation?
-        n = len(arr)
-        print(arr)
-    print("THIS IS THE COUNTER: ",counter)
-    return outputArray
-
-
-#------------------------------------------------------------------------------------------------------------------------------
-
-
 def linearVersion2(arr):
     n = len(arr)  # Get the length of the array
     outputArray = [0,0,0]
