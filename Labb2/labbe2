@@ -22,7 +22,7 @@ def divConSum(list):
 
     if a1 > 0:
         if  a1 + b2 > 0:
-            currentsum = b1 + b2
+            currentsum = a1 + b2
             print("we are merging ", b1, " with ", b2)
             currentsum2 = b1 + b2
             #here we will save the sum of the two arrays as our new max value if it is greater than our current max value
@@ -52,5 +52,6 @@ def divConSum(list):
     return tuple(output)
 
 #testlist = [16, -17, 6, -2, 19, -18, 4, 1, 15, -1, -1, -1, -1, -1, -1, 1]
-testlist = [1, -3, 79, 5, -1, 80,2, 9]
+#testlist = [1, -3, 79, 5, -1, 80,2, 9]
+#testlist = [-1, -1, -1, 10, -5, 10, -1, -1]
 print("The biggest sum is:  ", divConSum(testlist)[1])
