@@ -1,0 +1,45 @@
+
+
+def divConSum(list):
+    if len(list) == 1:
+        # Hardcoded insertionsort for n = 3
+
+        maxsum = list[0]
+        currentsum = list[0]
+        return currentsum, maxsum
+        
+
+    mid = len(list) // 2
+    a1, max1  = divConSum(list[:mid])
+    a2, max2 = divConSum(list[mid:])
+
+    #counting out the biggest maximum number we currently have
+    if max2 > max1:
+        max1 = max2
+
+    if a1 > 0:
+        if  a1 + a2 > 0:
+            currentsum = a1 + a2
+            #here we will save the sum of the two arrays as our new max value if it is greater than our current max value
+            if currentsum > max1:
+                max1 = currentsum
+        else:
+            #the subarray cant continue as a2 turns it into a net-loss meaning it is better to just start over.
+            currentsum = 0
+    elif a2 > 0:
+        currentsum = a2
+    else:
+        currentsum = 0
+   
+    #counting out the largest max sum we have (can become lesser as long as sum is still positive)
+    return currentsum, max1
+    
+        
+    
+
+    
+    # Return output converted to tuple
+    return tuple(output)
+
+testlist = [16, 49, 22, 38, 14, 38, 50, 8, 25, 13, 39, 40, 36, 22, 27, 44, 23, 32, 25, 15, -5, 30, 48, 48]
+print(divConSum(testlist))
