@@ -45,4 +45,4 @@ def divConSum(list):
     return tuple(output)
 
 testlist = [16, -17, 6, -2, 19, -18, 4, 1]
-print("The biggest sum is: ", divConSum(testlist)[1])
+print("The biggest sum is:  ", divConSum(testlist)[1])
