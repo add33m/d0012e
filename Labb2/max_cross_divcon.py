@@ -1,4 +1,4 @@
-
+# This algorithm runs in O(n-1)
 def max_cross_divcon(list):
   # Vals to calculate
   # msas (Maximum SubArray Sum), msas_l (msas that touches left edge), msas_r (msas that touches right edge), tot
@@ -28,6 +28,17 @@ def max_cross_divcon(list):
   tot = left_tot + right_tot
 
   return msas, msas_l, msas_r, tot
+
+# max(a, b) runs 1 comparison
+# max(a, b, c) runs 2 comparisons
+# Total comparisons for k:
+# k=1 => 5 = 5
+# k=2 => 1 + 5 + 5 + 4 = 15
+# k=3 => 1 + 1 + 1 + 5 + 5 + 5 + 5 + 4 + 4 + 4 = 35
+# comp(k) = (2^k - 1) * 5
+# n = 2^k
+# k = log2(n)
+# comp(k) = (2^log2(n) - 1) * 5 = n-1 * 5
 
 test = [-1, -1, -1, 10, -5, 10, -1, -1]
 test1 = [16, -17, 6, -2, 19, -18, 4, 1, 15, -1, -1, -1, -1, -1, -1, 1]

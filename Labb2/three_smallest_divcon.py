@@ -3,7 +3,7 @@
 # With this we can divide in 2 until array is exactly len 3, and return these values in sorted order
 # We then perform use a mergesort-like algorithm and always return only the three smallest values
 
-# This algorithm will not run in exactly O(n) but worst-case is approximately linear O(n + log n)
+# This algorithm will not run in exactly O(n) but worst-case is approximately linear O(n - 1)
 
 def three_smallest_divcon(list):
     if len(list) == 3:
