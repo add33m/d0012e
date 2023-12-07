@@ -1,11 +1,27 @@
 def linearVersion2(arr):
     n = len(arr)  # Get the length of the array
     outputArray = [0,0,0]
-    outputArray[0] = arr[0]
-    outputArray[1] = arr[0]
-    outputArray[2] = arr[0]
 
-    for j in range(0, n):
+    #skapandet av output arrayen
+    outputArray[0] = arr[0]
+    if arr[1] < arr[0]:
+        outputArray[1] = arr[0]
+        outputArray[0] = arr[1]
+    else:
+        outputArray[1] = arr[1]
+
+    if arr[2] < outputArray[0]:
+        outputArray[2] = outputArray[1]
+        outputArray[1] = outputArray[0]
+        outputArray[0] = arr[2]
+    elif arr[2] < outputArray[1]:
+        outputArray[2] = outputArray[1]
+        outputArray[1] = arr[2]
+    else:
+        outputArray[2] = arr[2]
+
+    #Gå igenom listan
+    for j in range(3, n):
         if outputArray[0] >= arr[j]:
             outputArray[2] = outputArray[1]
             outputArray[1] = outputArray[0]
@@ -106,10 +122,10 @@ def divConVersion3(arr):
 
 
 
-arra = [5,-20,10,8,7,2,1,13,77,65,35,3,57,87,99,88,51,32,66,666,-9,-10]
+arra = [-50,-20,10,8,7,2,1,13,77,65,35,3,57,87,99,88,51,32,66,666,-9,-10]
 arra2 = [5,20,10,8,7,2,1,13,55,0,8,-7,-9,-11,-13]
 arra3 = [5,20,10,8,7,2,1,13,55,0,8,-7,-9,-11,-13]
 #print("This is the result: ", linearVersion(arra))                  #It makes (3n)-3 operations
 print("This is they result ", linearVersion2(arra))
-print("This is the other result: ", divConVersion(arra2))
-print("This is the other result: ", divConVersion2(arra3))
+#print("This is the other result: ", divConVersion(arra2))
+#print("This is the other result: ", divConVersion2(arra3))
