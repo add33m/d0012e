@@ -1,6 +1,6 @@
 # General node object with left/right stores
 class Node:
-  # Left/right values can be other nodes or just normal values
+  # Left/right values can be other nodes or None (null)
   l, l_size = None, 0
   r, r_size = None, 0
   val = None
@@ -61,13 +61,12 @@ class Node:
 
 
   # Recursive functions to add a new node to the left/right tree
-  def add_node_left(self, value):
-    # TODO: Increase left counter to prevent having to recalculate size, insert new node at appropriate place
+  def insert_node(self, value, c):
     pass
-
-  def add_node_right(self, value):
-    # TODO: Increase right counter to prevent having to recalculate size, insert new node at appropriate place
-    pass
+    # TODO:
+    # - Increase left/right counter to prevent having to recalculate size
+    # - Insert new node at appropriate place (move nodes around if necessary)
+    # - Rebalance if necessary (if subtrees are too unbalanced, c determines the limit for this)
 
 # Recursive helper function to perform rebalancing of tree by creating a subtree from a given list of included children/leaves
 def create_subtree(children):
