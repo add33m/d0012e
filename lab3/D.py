@@ -59,30 +59,29 @@ class Node:
     self.l = replacement.l
     self.r = replacement.r
 
-
   # Recursive functions to add a new node to the left/right tree
-def insert_node(self, value, c):
-  if self.val < value:
-    # Increase the size of the left subtree
-    self.l_size += 1
-    # Either move on to the next subtree or create one if none exists
-    if self.l:
-      insert_node(self.l, value, c)
+  def insert_node(self, value, c):
+    if self.val < value:
+      # Increase the size of the left subtree
+      self.l_size += 1
+      # Either move on to the next subtree or create one if none exists
+      if self.l:
+        self.l.insert_node(value, c)
+      else:
+        # self.l = create_subtree(value)
+        self.l = Node(value)
     else:
-      # self.l = create_subtree(value)
-      self.l = Node(value)
-  else:
-    # Increase the size of the right subtree
-    self.r_size += 1
-    # Either move on to the next subtree or create one if none exists
-    if self.r:
-      insert_node(self.r, value, c)
-    else:
-      self.r = Node(value)
-      
-  # Check to see if we need to rebalance the tree or not
-  if (self.l_size > self.get_size()*c) or (self.r_size > self.get_size()*c):
-    self.rebalance()
+      # Increase the size of the right subtree
+      self.r_size += 1
+      # Either move on to the next subtree or create one if none exists
+      if self.r:
+        self.r.insert_node(value, c)
+      else:
+        self.r = Node(value)
+
+    # Check to see if we need to rebalance the tree or not
+    if (self.l_size > self.get_size()*c) or (self.r_size > self.get_size()*c):
+      self.rebalance()
     
     
 
@@ -117,4 +116,5 @@ test_tree = create_subtree([0, 0, 2, 5, 6, 9, 10])
 print(test_tree.get_size())
 print(test_tree.l.r.val)
 
-insert_node(test_tree, 5, 1)
+test_tree.insert_node(5, 1)
+print(test_tree.get_size())
