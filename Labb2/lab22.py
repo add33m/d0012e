@@ -1,11 +1,12 @@
 import math as m
 
 def linearVersion2(arr):
-    #skapandet av output arrayen
     n = len(arr)  # Get the length of the array
-    outputArray = [m.inf] * 3
+    outputArray = [0,0,0]
+    outputArray[0] = m.inf
+    outputArray[1] = m.inf
+    outputArray[2] = m.inf
 
-    #Gå igenom listan
     for j in range(0, n):
         if outputArray[0] >= arr[j]:
             outputArray[2] = outputArray[1]
@@ -107,10 +108,10 @@ def divConVersion3(arr):
 
 
 
-arra = [-50,-20,10,8,7,2,1,13,77,65,35,3,57,87,99,88,51,32,66,666,-9,-10]
+arra = [5,-20,10,8,7,2,1,13,77,65,35,3,57,87,99,88,51,32,66,666,-9,-10]
 arra2 = [5,20,10,8,7,2,1,13,55,0,8,-7,-9,-11,-13]
 arra3 = [5,20,10,8,7,2,1,13,55,0,8,-7,-9,-11,-13]
 #print("This is the result: ", linearVersion(arra))                  #It makes (3n)-3 operations
 print("This is they result ", linearVersion2(arra))
-#print("This is the other result: ", divConVersion(arra2))
-#print("This is the other result: ", divConVersion2(arra3))
+print("This is the other result: ", divConVersion(arra2))
+print("This is the other result: ", divConVersion2(arra3))
