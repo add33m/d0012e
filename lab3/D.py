@@ -114,3 +114,5 @@ def create_subtree(children):
 test_tree = create_subtree([0, 0, 2, 5, 6, 9, 10])
 print(test_tree.get_size())
 print(test_tree.l.r.val)
+
+insert_node(test_tree, 5, 1)
