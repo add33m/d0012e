@@ -62,25 +62,27 @@ class Node:
 
   # Recursive functions to add a new node to the left/right tree
 def insert_node(self, value, c):
-    if self.val < value:
-      # Increase the size of the left subtree
-      self.l_size += 1
-      # Either move on to the next subtree or create one if none exists
-      if self.l:
-        insert_node(self.l, value, c)
-      else:
-        self.l = create_subtree(value)
+  if self.val < value:
+    # Increase the size of the left subtree
+    self.l_size += 1
+    # Either move on to the next subtree or create one if none exists
+    if self.l:
+      insert_node(self.l, value, c)
     else:
-      # Increase the size of the right subtree
-      self.r_size += 1
-      # Either move on to the next subtree or create one if none exists
-      if self.r:
-        insert_node(self.r, value, c)
-      else:
-        self.r = create_subtree(value)
-    # Check to see if we need to rebalance the tree or not
-    if (self.l_size < self.get_size) or (self.r_size < self.get_size):
-      self.rebalance    #is this the correct way to call this command or do I need to use self.rebalance(self) ?
+      # self.l = create_subtree(value)
+      self.l = Node(value)
+  else:
+    # Increase the size of the right subtree
+    self.r_size += 1
+    # Either move on to the next subtree or create one if none exists
+    if self.r:
+      insert_node(self.r, value, c)
+    else:
+      self.r = Node(value)
+      
+  # Check to see if we need to rebalance the tree or not
+  if (self.l_size > self.get_size()*c) or (self.r_size > self.get_size()*c):
+    self.rebalance()
     
     
 
